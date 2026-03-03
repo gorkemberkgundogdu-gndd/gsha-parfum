@@ -1,69 +1,493 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSHA Eau de Parfum | İkonik Vanilya</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GSHA — Velours</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --black:#080608;
+    --deep:#0e0b10;
+    --card:#131016;
+    --gold:#c9a96e;
+    --gold-light:#e2c99a;
+    --burgundy:#6b1d2e;
+    --text:#e8e0d5;
+    --muted:#7a7270;
+    --serif:'Cormorant Garamond',serif;
+    --sans:'Inter',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px}
+  ::-webkit-scrollbar-track{background:var(--black)}
+  ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 60px;
+    background:linear-gradient(to bottom,rgba(8,6,8,.95),transparent);
+    transition:background .3s;
+  }
+  nav.scrolled{background:rgba(8,6,8,.97);border-bottom:1px solid rgba(201,169,110,.12)}
+  .logo{font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:10px;color:var(--gold);text-transform:uppercase}
+  .nav-links{display:flex;gap:36px;list-style:none}
+  .nav-links a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    padding:10px 24px;border:1px solid var(--gold);color:var(--gold);
+    background:transparent;cursor:pointer;text-decoration:none;
+    transition:all .3s;font-family:var(--sans)
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--black)}
+
+  /* HERO */
+  .hero{
+    position:relative;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(107,29,46,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 30% 60%, rgba(201,169,110,.06) 0%, transparent 60%),
+      linear-gradient(135deg, #080608 0%, #0e0a10 50%, #080608 100%);
+  }
+  .hero-banner{
+    position:absolute;inset:0;
+    background:url('') center/cover no-repeat;
+    opacity:0.18;
+    mix-blend-mode:luminosity;
+  }
+  .hero-banner-placeholder{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    opacity:.04;
+    font-family:var(--serif);font-size:220px;font-weight:300;letter-spacing:20px;
+    color:var(--gold);pointer-events:none;user-select:none;
+    white-space:nowrap;overflow:hidden;
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    text-align:center;padding:0 20px;
+    max-width:800px;
+  }
+  .hero-eyebrow{
+    font-size:11px;letter-spacing:6px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:28px;opacity:.8;
+  }
+  .hero-title{
+    font-family:var(--serif);font-size:clamp(72px,12vw,140px);
+    font-weight:300;line-height:.9;letter-spacing:6px;
+    color:#fff;margin-bottom:24px;
+    text-shadow:0 0 80px rgba(201,169,110,.12);
+  }
+  .hero-title em{
+    font-style:italic;color:var(--gold);display:block;
+    font-size:clamp(80px,13vw,150px);
+  }
+  .hero-sub{
+    font-family:var(--serif);font-size:17px;font-style:italic;
+    color:var(--muted);letter-spacing:1px;margin-bottom:52px;line-height:1.6;
+  }
+  .hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(135deg,#25d366,#1da851);
+    color:#fff;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
+    padding:16px 36px;text-decoration:none;font-family:var(--sans);font-weight:500;
+    transition:all .3s;border:none;cursor:pointer;
+    box-shadow:0 8px 32px rgba(37,211,102,.2);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(37,211,102,.35)}
+  .btn-primary svg{width:18px;height:18px;flex-shrink:0}
+  .btn-secondary{
+    display:inline-flex;align-items:center;
+    border:1px solid rgba(201,169,110,.35);color:var(--gold);
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    padding:16px 36px;text-decoration:none;font-family:var(--sans);
+    transition:all .3s;
+  }
+  .btn-secondary:hover{border-color:var(--gold);background:rgba(201,169,110,.06)}
+  .hero-scroll{
+    position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    opacity:.4;animation:pulse 2.5s ease-in-out infinite;
+  }
+  .hero-scroll span{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+  .scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent)}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.7}}
+
+  /* DIVIDER */
+  .divider{
+    display:flex;align-items:center;justify-content:center;gap:20px;
+    padding:60px 60px 0;
+  }
+  .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,.2),transparent)}
+  .divider-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.6}
+
+  /* SECTIONS SHARED */
+  section{padding:100px 60px}
+  .section-label{
+    font-size:10px;letter-spacing:5px;text-transform:uppercase;
+    color:var(--gold);opacity:.7;margin-bottom:16px;display:block;
+  }
+  .section-title{
+    font-family:var(--serif);font-size:clamp(36px,5vw,56px);
+    font-weight:300;line-height:1.1;color:#fff;margin-bottom:20px;
+  }
+  .section-title em{font-style:italic;color:var(--gold)}
+  .section-desc{
+    font-size:14px;line-height:1.8;color:var(--muted);
+    max-width:520px;letter-spacing:.3px;
+  }
+
+  /* NOTES */
+  .notes-section{background:var(--deep)}
+  .notes-inner{max-width:1100px;margin:0 auto}
+  .notes-header{text-align:center;margin-bottom:72px}
+  .notes-header .section-desc{margin:0 auto}
+  .notes-pyramid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    position:relative;
+  }
+  .note-card{
+    padding:48px 36px;
+    background:var(--card);
+    border-top:2px solid transparent;
+    position:relative;overflow:hidden;
+    transition:transform .3s;
+  }
+  .note-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(201,169,110,.04),transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  .note-card:hover{transform:translateY(-4px)}
+  .note-card:hover::before{opacity:1}
+  .note-card:nth-child(1){border-top-color:rgba(201,169,110,.6)}
+  .note-card:nth-child(2){border-top-color:rgba(201,169,110,.4)}
+  .note-card:nth-child(3){border-top-color:rgba(201,169,110,.2)}
+  .note-tier{
+    font-size:9px;letter-spacing:4px;text-transform:uppercase;
+    color:var(--gold);opacity:.7;margin-bottom:20px;
+  }
+  .note-name{
+    font-family:var(--serif);font-size:26px;font-weight:300;
+    color:#fff;margin-bottom:24px;letter-spacing:1px;
+  }
+  .note-items{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .note-items li{
+    font-size:13px;color:var(--muted);letter-spacing:.5px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .note-items li::before{
+    content:'';width:20px;height:1px;
+    background:linear-gradient(to right,var(--gold),transparent);
+    flex-shrink:0;
+  }
+
+  /* FEATURES */
+  .features-section{padding-top:120px;padding-bottom:120px}
+  .features-inner{max-width:1100px;margin:0 auto}
+  .features-header{margin-bottom:64px}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .feature-card{
+    padding:44px 36px;border:1px solid rgba(201,169,110,.1);
+    position:relative;overflow:hidden;transition:border-color .3s,transform .3s;
+  }
+  .feature-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+  .feature-num{
+    font-family:var(--serif);font-size:72px;font-weight:300;
+    color:rgba(201,169,110,.08);position:absolute;top:20px;right:28px;
+    line-height:1;
+  }
+  .feature-icon{font-size:28px;margin-bottom:24px}
+  .feature-title{
+    font-family:var(--serif);font-size:22px;font-weight:400;
+    color:#fff;margin-bottom:12px;letter-spacing:.5px;
+  }
+  .feature-text{font-size:13px;line-height:1.8;color:var(--muted)}
+
+  /* PRICING */
+  .pricing-section{background:var(--deep)}
+  .pricing-inner{
+    max-width:600px;margin:0 auto;text-align:center;
+  }
+  .pricing-card{
+    margin-top:56px;padding:64px 56px;
+    border:1px solid rgba(201,169,110,.2);
+    background:var(--card);
+    position:relative;overflow:hidden;
+  }
+  .pricing-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(to right,transparent,var(--gold),transparent);
+  }
+  .pricing-badge{
+    display:inline-block;font-size:9px;letter-spacing:4px;
+    text-transform:uppercase;color:var(--gold);
+    border:1px solid rgba(201,169,110,.3);padding:6px 20px;
+    margin-bottom:32px;
+  }
+  .pricing-product{
+    font-family:var(--serif);font-size:42px;font-weight:300;
+    color:#fff;margin-bottom:6px;letter-spacing:3px;
+  }
+  .pricing-sub{
+    font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:40px;
+  }
+  .pricing-divider{width:40px;height:1px;background:var(--gold);margin:0 auto 40px;opacity:.4}
+  .pricing-perks{list-style:none;margin-bottom:48px;display:flex;flex-direction:column;gap:14px}
+  .pricing-perks li{
+    font-size:13px;color:var(--muted);display:flex;align-items:center;
+    justify-content:center;gap:10px;letter-spacing:.3px;
+  }
+  .pricing-perks li::before{content:'✦';color:var(--gold);font-size:8px;opacity:.7}
+  .price-amount{
+    font-family:var(--serif);font-size:clamp(52px,8vw,72px);font-weight:300;
+    color:var(--gold-light);line-height:1;margin-bottom:6px;
+  }
+  .price-currency{font-size:24px;vertical-align:super;font-weight:300}
+  .price-note{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:44px}
+  .btn-wa{
+    display:inline-flex;align-items:center;justify-content:center;gap-12px;
+    width:100%;
+    background:linear-gradient(135deg,#25d366,#1da851);
+    color:#fff;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
+    padding:18px 36px;text-decoration:none;font-family:var(--sans);font-weight:500;
+    transition:all .3s;
+    box-shadow:0 8px 32px rgba(37,211,102,.2);
+    gap:12px;
+  }
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(37,211,102,.35)}
+  .btn-wa svg{width:20px;height:20px;flex-shrink:0}
+
+  /* CONTACT */
+  .contact-section{
+    text-align:center;
+    background:
+      radial-gradient(ellipse 60% 100% at 50% 100%, rgba(107,29,46,.15) 0%, transparent 70%),
+      var(--black);
+  }
+  .contact-inner{max-width:600px;margin:0 auto}
+  .contact-title{
+    font-family:var(--serif);font-size:clamp(42px,7vw,80px);
+    font-weight:300;line-height:1;color:#fff;margin-bottom:24px;
+  }
+  .contact-title em{font-style:italic;color:var(--gold)}
+  .contact-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:48px}
+  .contact-links{display:flex;flex-direction:column;gap:16px;align-items:center}
+  .contact-link{
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;transition:color .3s;
+  }
+  .contact-link:hover{color:var(--gold)}
+
+  /* FOOTER */
+  footer{
+    padding:40px 60px;
+    border-top:1px solid rgba(201,169,110,.08);
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:20px;
+  }
+  .footer-logo{font-family:var(--serif);font-size:22px;letter-spacing:8px;color:var(--gold);opacity:.6}
+  .footer-text{font-size:11px;letter-spacing:1px;color:var(--muted);opacity:.5}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    nav{padding:20px 24px}
+    .nav-links,.nav-cta{display:none}
+    section{padding:80px 24px}
+    .divider{padding:40px 24px 0}
+    .notes-pyramid{grid-template-columns:1fr}
+    .features-grid{grid-template-columns:1fr}
+    .pricing-card{padding:44px 28px}
+    footer{padding:32px 24px;flex-direction:column;text-align:center}
+  }
+</style>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <span class="badge">GSHA EAU DE PARFUM</span>
-                <h1>Zarafetin <br><em>Yeni İmzası</em></h1>
-                <p>Kırmızı meyvelerin tazeliği ve yoğun vanilyanın büyüleyici sıcaklığıyla tanışın.</p>
-                <a href="https://wa.me/905XXXXXXXXX" class="btn-primary">SİPARİŞ VER</a>
-            </div>
-            <div class="hero-img">
-                <img src="hero.jpg" alt="GSHA Parfum">
-            </div>
-        </div>
-    </header>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">GSHA</div>
+  <ul class="nav-links">
+    <li><a href="#notes">Notalar</a></li>
+    <li><a href="#features">Hakkında</a></li>
+    <li><a href="#pricing">Satın Al</a></li>
+  </ul>
+  <a href="https://wa.me/905526183961?text=Merhaba%2C%20GSHA%20Velours%20parfümü%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" class="nav-cta">Sipariş Ver</a>
+</nav>
 
-    <section class="notes">
-        <div class="container">
-            <h2 class="title">Koku Piramidi</h2>
-            <div class="notes-grid">
-                <div class="note-card">
-                    <h3>Üst Notalar</h3>
-                    <ul>
-                        <li>Kırmızı Meyveler</li>
-                        <li>Hafif Narenciye</li>
-                        <li>Tatlı Vanilya Dokunuşu</li>
-                    </ul>
-                </div>
-                <div class="note-card highlight">
-                    <h3>Orta Notalar</h3>
-                    <ul>
-                        <li>Badem</li>
-                        <li>Yasemin</li>
-                        <li>Kremamsı Vanilya</li>
-                        <li>Pudramsı Beyaz Çiçekler</li>
-                    </ul>
-                </div>
-                <div class="note-card">
-                    <h3>Dip Notalar</h3>
-                    <ul>
-                        <li>Yoğun Vanilya</li>
-                        <li>Tonka Fasulyesi</li>
-                        <li>Misk</li>
-                        <li>Hafif Odunsu Notalar</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-banner"></div>
+  <div class="hero-banner-placeholder">V</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">GSHA — Eau de Parfum</p>
+    <h1 class="hero-title">
+      <em>Velours</em>
+    </h1>
+    <p class="hero-sub">Bademin kadifesi,<br>vanilyann sonsuzluğu.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/905526183961?text=Merhaba%2C%20GSHA%20Velours%20parfümü%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp ile Sipariş Ver
+      </a>
+      <a href="#notes" class="btn-secondary">Notaları Keşfet</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Keşfet</span>
+  </div>
+</section>
 
-    <section class="gallery">
-        <div class="container grid-2">
-            <img src="bottle.jpg" alt="GSHA Bottle">
-            <img src="model.jpg" alt="GSHA Model">
-        </div>
-    </section>
+<div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
-    <script src="script.js"></script>
+<!-- NOTES -->
+<section class="notes-section" id="notes">
+  <div class="notes-inner">
+    <div class="notes-header">
+      <span class="section-label">Koku Piramidi</span>
+      <h2 class="section-title">Kadife gibi <em>katmanlar</em></h2>
+      <p class="section-desc">Her nota, bir sonrakini kucaklayan zengin ve derin bir yolculuk sunar.</p>
+    </div>
+    <div class="notes-pyramid">
+      <div class="note-card">
+        <div class="note-tier">Üst Notalar</div>
+        <div class="note-name">İlk Dokunuş</div>
+        <ul class="note-items">
+          <li>Kırmızı Meyveler</li>
+          <li>Hafif Narenciye</li>
+          <li>Tatlı Vanilya Dokunuşu</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <div class="note-tier">Orta Notalar</div>
+        <div class="note-name">Kalp</div>
+        <ul class="note-items">
+          <li>Badem</li>
+          <li>Yasemin</li>
+          <li>Kremamsı Vanilya</li>
+          <li>Pudramsı Beyaz Çiçekler</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <div class="note-tier">Dip Notalar</div>
+        <div class="note-name">İz</div>
+        <ul class="note-items">
+          <li>Yoğun Vanilya</li>
+          <li>Tonka Fasulyesi</li>
+          <li>Misk</li>
+          <li>Hafif Odunsu Notalar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <div class="features-header">
+      <span class="section-label">Neden Velours</span>
+      <h2 class="section-title">Sadece bir koku değil,<br><em>bir his</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-icon">🌹</div>
+        <div class="feature-title">Seçkin İçerikler</div>
+        <p class="feature-text">Tonka fasulyesi, badem özü ve saf yasemin bir araya gelerek eşsiz bir kadife imzası bırakır.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <div class="feature-icon">⏳</div>
+        <div class="feature-title">Uzun Kalıcılık</div>
+        <p class="feature-text">Derin vanilya ve misk bazı sayesinde koku, cildinizdeyken saatler boyunca varlığını hissettiren bir iz bırakır.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-icon">✦</div>
+        <div class="feature-title">GSHA İmzası</div>
+        <p class="feature-text">Velours, sıradan olanı reddeder. Her şişe, lüksü ve özgünlüğü harmanlayan GSHA'nın ruhunu taşır.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <span class="section-label" style="display:block;text-align:center">Sahip Ol</span>
+    <h2 class="section-title" style="text-align:center">Sınırlı <em>koleksiyon</em></h2>
+    <div class="pricing-card">
+      <div class="pricing-badge">Eau de Parfum</div>
+      <div class="pricing-product">Velours</div>
+      <div class="pricing-sub">by GSHA</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-perks">
+        <li>Badem & Vanilya Kompozisyonu</li>
+        <li>Uzun Süre Kalıcı Formül</li>
+        <li>Özel Şişe Tasarımı</li>
+        <li>Hızlı WhatsApp Sipariş</li>
+      </ul>
+      <a href="https://wa.me/905526183961?text=Merhaba%2C%20GSHA%20Velours%20parfümünü%20sipariş%20vermek%20istiyorum." target="_blank" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp ile Sipariş Ver
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">GSHA</div>
+  <div class="footer-text">© 2025 GSHA. Tüm hakları saklıdır.</div>
+  <div class="footer-text">Velours — Eau de Parfum</div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, {threshold: 0.12});
+
+  document.querySelectorAll('.note-card, .feature-card, .pricing-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .7s ease, transform .7s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
