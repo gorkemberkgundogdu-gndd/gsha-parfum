@@ -107,6 +107,98 @@
   .parfum-cta:hover{border-color:var(--gold);background:rgba(201,169,110,.06)}
   .parfum-cta-arrow{font-size:14px;transition:transform .3s}
   .parfum-cta:hover .parfum-cta-arrow{transform:translateX(5px)}
+
+  /* GALERI */
+  .gallery-section{padding:0 60px 100px;background:var(--black)}
+  .gallery-inner{max-width:1100px;margin:0 auto}
+  .gallery-label{
+    font-size:10px;letter-spacing:5px;text-transform:uppercase;
+    color:var(--gold);opacity:.5;margin-bottom:24px;display:block;text-align:center;
+  }
+  .gallery-carousel{position:relative}
+  .gallery-track-wrap{overflow:hidden}
+  .gallery-track{
+    display:flex;gap:12px;
+    transition:transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .gallery-thumb{
+    flex:0 0 calc(16.666% - 10px);
+    aspect-ratio:3/4;
+    cursor:pointer;overflow:hidden;
+    border:1px solid rgba(201,169,110,.08);
+    position:relative;
+    transition:border-color .3s;
+  }
+  .gallery-thumb:hover{border-color:rgba(201,169,110,.4)}
+  .gallery-thumb img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .5s ease;display:block;
+  }
+  .gallery-thumb:hover img{transform:scale(1.06)}
+  .gallery-thumb-overlay{
+    position:absolute;inset:0;
+    background:rgba(8,6,8,.0);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .3s;
+  }
+  .gallery-thumb:hover .gallery-thumb-overlay{background:rgba(8,6,8,.25)}
+  .gallery-thumb-icon{
+    color:var(--gold);font-size:20px;opacity:0;
+    transition:opacity .3s;
+  }
+  .gallery-thumb:hover .gallery-thumb-icon{opacity:1}
+  .gallery-arrows{display:flex;gap:12px;justify-content:center;margin-top:20px}
+  .gallery-arrow{
+    width:40px;height:40px;border:1px solid rgba(201,169,110,.2);
+    background:transparent;color:var(--gold);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;transition:all .3s;
+  }
+  .gallery-arrow:hover{border-color:var(--gold);background:rgba(201,169,110,.06)}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(8,6,8,.96);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s;
+  }
+  .lightbox.open{opacity:1;pointer-events:all}
+  .lightbox-img-wrap{
+    position:relative;max-width:90vw;max-height:90vh;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-img{
+    max-width:90vw;max-height:88vh;
+    object-fit:contain;
+    border:1px solid rgba(201,169,110,.15);
+    transform:scale(.95);transition:transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .lightbox.open .lightbox-img{transform:scale(1)}
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;
+    width:44px;height:44px;border:1px solid rgba(201,169,110,.3);
+    background:transparent;color:var(--gold);font-size:20px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .3s;z-index:201;
+  }
+  .lightbox-close:hover{background:rgba(201,169,110,.1);border-color:var(--gold)}
+  .lightbox-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:44px;height:44px;border:1px solid rgba(201,169,110,.3);
+    background:rgba(8,6,8,.7);color:var(--gold);font-size:18px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .lightbox-nav:hover{background:rgba(201,169,110,.1);border-color:var(--gold)}
+  .lightbox-prev{left:-60px}
+  .lightbox-next{right:-60px}
+  .lightbox-counter{
+    position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+    font-size:10px;letter-spacing:3px;color:var(--muted);
+  }
+
   @media(max-width:768px){
     .parfum-inner{grid-template-columns:1fr;gap:48px}
     .parfum-img-wrap{width:260px;height:360px;margin:0 auto}
@@ -114,6 +206,10 @@
     .parfum-specs{grid-template-columns:1fr}
     .spec-item{border-right:none;border-bottom:1px solid rgba(201,169,110,.12)}
     .spec-item:last-child{border-bottom:none}
+    .gallery-section{padding:0 24px 80px}
+    .gallery-thumb{flex:0 0 calc(33.333% - 8px)}
+    .lightbox-prev{left:-4px}
+    .lightbox-next{right:-4px}
   }
 
   /* HERO */
@@ -474,6 +570,54 @@
   </div>
 </section>
 
+<!-- GALERİ -->
+<div class="gallery-section">
+  <div class="gallery-inner">
+    <span class="gallery-label">Galeri</span>
+    <div class="gallery-carousel">
+      <div class="gallery-track-wrap">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-thumb" onclick="openLightbox(0)">
+            <img src="IMG_2752.PNG" alt="GSHA Velours 1" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+          <div class="gallery-thumb" onclick="openLightbox(1)">
+            <img src="IMG_2751.PNG" alt="GSHA Velours 2" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+          <div class="gallery-thumb" onclick="openLightbox(2)">
+            <img src="IMG_2754.PNG" alt="GSHA Velours 3" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+          <div class="gallery-thumb" onclick="openLightbox(3)">
+            <img src="IMG_2755.PNG" alt="GSHA Velours 4" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+          <div class="gallery-thumb" onclick="openLightbox(4)">
+            <img src="IMG_2756.PNG" alt="GSHA Velours 5" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+          <div class="gallery-thumb" onclick="openLightbox(5)">
+            <img src="IMG_2766.PNG" alt="GSHA Velours 6" loading="lazy"/>
+            <div class="gallery-thumb-overlay"><span class="gallery-thumb-icon">✦</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-img-wrap">
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+  </div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
 <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
 
 <!-- NOTES -->
@@ -601,6 +745,50 @@
       }
     });
   }, {threshold: 0.12});
+
+  // Lightbox
+  const galleryImages = [
+    'IMG_2752.PNG','IMG_2751.PNG','IMG_2754.PNG',
+    'IMG_2755.PNG','IMG_2756.PNG','IMG_2766.PNG'
+  ];
+  let currentLightboxIndex = 0;
+
+  function openLightbox(index) {
+    currentLightboxIndex = index;
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    const counter = document.getElementById('lightboxCounter');
+    img.src = galleryImages[index];
+    counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxOutside(e) {
+    if(e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+  function lightboxNav(dir) {
+    currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+    const img = document.getElementById('lightboxImg');
+    const counter = document.getElementById('lightboxCounter');
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = galleryImages[currentLightboxIndex];
+      counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+      img.style.opacity = '1';
+    }, 150);
+    img.style.transition = 'opacity .15s';
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') lightboxNav(-1);
+    if(e.key === 'ArrowRight') lightboxNav(1);
+  });
 
   document.querySelectorAll('.note-card, .feature-card, .pricing-card, .parfum-img-wrap, .parfum-details').forEach(el => {
     el.style.opacity = '0';
