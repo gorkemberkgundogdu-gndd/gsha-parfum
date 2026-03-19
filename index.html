@@ -30,23 +30,91 @@
   /* NAV */
   nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;align-items:center;justify-content:space-between;
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;
     padding:24px 60px;
     background:linear-gradient(to bottom,rgba(8,6,8,.95),transparent);
     transition:background .3s;
   }
   nav.scrolled{background:rgba(8,6,8,.97);border-bottom:1px solid rgba(201,169,110,.12)}
-  .logo{font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:10px;color:var(--gold);text-transform:uppercase}
-  .nav-links{display:flex;gap:36px;list-style:none}
+  .logo{font-family:var(--serif);font-size:28px;font-weight:300;letter-spacing:10px;color:var(--gold);text-transform:uppercase;justify-self:start}
+  .nav-links{display:flex;gap:36px;list-style:none;justify-self:center}
   .nav-links a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
   .nav-links a:hover{color:var(--gold)}
   .nav-cta{
     font-size:11px;letter-spacing:2px;text-transform:uppercase;
     padding:10px 24px;border:1px solid var(--gold);color:var(--gold);
     background:transparent;cursor:pointer;text-decoration:none;
-    transition:all .3s;font-family:var(--sans)
+    transition:all .3s;font-family:var(--sans);justify-self:end;
   }
   .nav-cta:hover{background:var(--gold);color:var(--black)}
+
+  /* PARFÜM SHOWCASE */
+  .parfum-section{padding:120px 60px;overflow:hidden}
+  .parfum-inner{
+    max-width:1100px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  }
+  .parfum-visual{position:relative;display:flex;justify-content:center}
+  .parfum-img-wrap{position:relative;width:360px;height:500px}
+  .parfum-img-glow{
+    position:absolute;inset:-60px;
+    background:radial-gradient(ellipse at center,rgba(201,169,110,.13) 0%,transparent 68%);
+    animation:glowPulse 3.5s ease-in-out infinite;
+  }
+  @keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+  .parfum-img{
+    position:relative;z-index:1;
+    width:100%;height:100%;object-fit:cover;
+    border:1px solid rgba(201,169,110,.1);
+  }
+  .parfum-corner{position:absolute;width:24px;height:24px;border-color:rgba(201,169,110,.35);border-style:solid}
+  .parfum-corner-tl{top:-6px;left:-6px;border-width:1px 0 0 1px}
+  .parfum-corner-tr{top:-6px;right:-6px;border-width:1px 1px 0 0}
+  .parfum-corner-bl{bottom:-6px;left:-6px;border-width:0 0 1px 1px}
+  .parfum-corner-br{bottom:-6px;right:-6px;border-width:0 1px 1px 0}
+  .parfum-details{}
+  .parfum-tag{display:inline-flex;align-items:center;gap:12px;margin-bottom:28px}
+  .parfum-tag-line{width:32px;height:1px;background:var(--gold);opacity:.5}
+  .parfum-tag span{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:.8}
+  .parfum-title{
+    font-family:var(--serif);font-size:clamp(42px,5vw,64px);
+    font-weight:300;line-height:1;color:#fff;
+    margin-bottom:8px;letter-spacing:4px;
+  }
+  .parfum-title em{display:block;font-style:italic;color:var(--gold);font-size:clamp(50px,6vw,76px)}
+  .parfum-volume{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:36px}
+  .parfum-desc-text{
+    font-family:var(--serif);font-size:16px;font-style:italic;
+    line-height:1.9;color:rgba(232,224,213,.65);
+    margin-bottom:44px;max-width:420px;
+  }
+  .parfum-specs{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border:1px solid rgba(201,169,110,.12);margin-bottom:44px;
+  }
+  .spec-item{padding:18px 20px;border-right:1px solid rgba(201,169,110,.12)}
+  .spec-item:last-child{border-right:none}
+  .spec-label{display:block;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:7px}
+  .spec-value{display:block;font-family:var(--serif);font-size:16px;color:#fff;font-weight:300;letter-spacing:.5px}
+  .parfum-cta{
+    display:inline-flex;align-items:center;gap:12px;
+    border:1px solid rgba(201,169,110,.35);color:var(--gold);
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;
+    padding:15px 36px;text-decoration:none;font-family:var(--sans);
+    transition:all .3s;
+  }
+  .parfum-cta:hover{border-color:var(--gold);background:rgba(201,169,110,.06)}
+  .parfum-cta-arrow{font-size:14px;transition:transform .3s}
+  .parfum-cta:hover .parfum-cta-arrow{transform:translateX(5px)}
+  @media(max-width:768px){
+    .parfum-inner{grid-template-columns:1fr;gap:48px}
+    .parfum-img-wrap{width:260px;height:360px;margin:0 auto}
+    .parfum-section{padding:80px 24px}
+    .parfum-specs{grid-template-columns:1fr}
+    .spec-item{border-right:none;border-bottom:1px solid rgba(201,169,110,.12)}
+    .spec-item:last-child{border-bottom:none}
+  }
 
   /* HERO */
   .hero{
@@ -322,6 +390,7 @@
 <nav id="navbar">
   <div class="logo">GSHA</div>
   <ul class="nav-links">
+    <li><a href="#parfum">Parfüm</a></li>
     <li><a href="#notes">Notalar</a></li>
     <li><a href="#features">Hakkında</a></li>
     <li><a href="#pricing">Satın Al</a></li>
@@ -345,12 +414,63 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp ile Sipariş Ver
       </a>
-      <a href="#notes" class="btn-secondary">Notaları Keşfet</a>
+      <a href="#parfum" class="btn-secondary">Parfümü Keşfet</a>
     </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Keşfet</span>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+<!-- PARFÜM SHOWCASE -->
+<section class="parfum-section" id="parfum">
+  <div class="parfum-inner">
+    <div class="parfum-visual">
+      <div class="parfum-img-wrap">
+        <div class="parfum-img-glow"></div>
+        <img src="IMG_2752.PNG" alt="GSHA Velours Parfüm" class="parfum-img"/>
+        <div class="parfum-corner parfum-corner-tl"></div>
+        <div class="parfum-corner parfum-corner-tr"></div>
+        <div class="parfum-corner parfum-corner-bl"></div>
+        <div class="parfum-corner parfum-corner-br"></div>
+      </div>
+    </div>
+    <div class="parfum-details">
+      <div class="parfum-tag">
+        <div class="parfum-tag-line"></div>
+        <span>GSHA Collection</span>
+      </div>
+      <h2 class="parfum-title">
+        GSHA
+        <em>Velours</em>
+      </h2>
+      <p class="parfum-volume">Eau de Parfum · 50 ml</p>
+      <p class="parfum-desc-text">
+        Kadife dokunuşlu bir anlatı. Bademin sıcaklığı ile vanilyann
+        zamansız derinliği, cildinizde unutulmaz bir iz bırakır.
+      </p>
+      <div class="parfum-specs">
+        <div class="spec-item">
+          <span class="spec-label">Konsantrasyon</span>
+          <span class="spec-value">EDP</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Hacim</span>
+          <span class="spec-value">50 ml</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Kalıcılık</span>
+          <span class="spec-value">8–12 Saat</span>
+        </div>
+      </div>
+      <a href="https://wa.me/905526183961?text=Merhaba%2C%20GSHA%20Velours%20parfümünü%20sipariş%20vermek%20istiyorum." target="_blank" class="parfum-cta">
+        Sipariş Ver
+        <span class="parfum-cta-arrow">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -482,7 +602,7 @@
     });
   }, {threshold: 0.12});
 
-  document.querySelectorAll('.note-card, .feature-card, .pricing-card').forEach(el => {
+  document.querySelectorAll('.note-card, .feature-card, .pricing-card, .parfum-img-wrap, .parfum-details').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity .7s ease, transform .7s ease';
